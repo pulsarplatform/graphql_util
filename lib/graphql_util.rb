@@ -30,7 +30,7 @@ module GraphqlUtil
     base.const_set('GRAPHQL_UTIL_GRAPHQL_HEADERS', headers)
     base.extend GraphqlMethods
 
-    base_client = base.client
+    base_client = base.graphql_client
     Dir.children("#{path}/queries").each do |query|
       raise "GraphqlUtil error - Invalid file #{query} found! Expected file extension to be .graphql" unless query.match(/.graphql/)
       const_name = query.gsub('.graphql', '')
@@ -50,8 +50,8 @@ module GraphqlUtil
     #
     # @return [GraphqlUtil::Client] Client instance
     #
-    def client
-      GraphqlUtil::Client.new(schema: schema.load_schema, execute: http)
+    def graphql_client
+      GraphqlUtil::Client.new(schema: schema.load_schema, execute: graphql_http)
     end
 
     #
@@ -59,7 +59,7 @@ module GraphqlUtil
     #
     # @return [GraphqlUtil::Http] Required HTTP Client
     #
-    def http
+    def graphql_http
       GraphqlUtil::Http.new(endpoint: self::GRAPHQL_UTIL_GRAPHQL_ENDPOINT, headers: self::GRAPHQL_UTIL_GRAPHQL_HEADERS)
     end
 
@@ -72,7 +72,7 @@ module GraphqlUtil
     # @return [Monad] Succes(:data) / Failure(:messages, :problems)
     #
     def query(query, variables: {})
-      client.query(query, variables: variables)
+      graphql_client.query(query, variables: variables)
     end
 
     #
@@ -81,7 +81,7 @@ module GraphqlUtil
     # @return [GraphqlUtil::Schema] Schema instance
     #
     def schema
-      GraphqlUtil::Schema.new(http, path: "#{self::GRAPHQL_UTIL_GRAPHQL_PATH}/#{SCHEMA_FILENAME}")
+      GraphqlUtil::Schema.new(graphql_http, path: "#{self::GRAPHQL_UTIL_GRAPHQL_PATH}/#{SCHEMA_FILENAME}")
     end
   end
 end
