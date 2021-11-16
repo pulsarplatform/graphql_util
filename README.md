@@ -21,6 +21,16 @@ Or install it yourself as:
 
     $ gem install graphql_util
 
+## Build and Push
+
+```Shell
+gem build graphql_util.gemspec 
+```
+
+```Shell
+gem push --key github --host https://rubygems.pkg.github.com/pulsarplatform graphql_util-X.Y.Z.gem 
+```
+
 ## Usage
 
 Define a GraphQL client class, like so:

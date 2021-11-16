@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    graphql_util (0.1.1)
+    graphql_util (0.1.2)
       graphql-client (~> 0)
 
 GEM
@@ -65,4 +65,4 @@ DEPENDENCIES
   webmock
 
 BUNDLED WITH
-   2.2.30
+   2.2.31
