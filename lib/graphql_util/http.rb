@@ -15,7 +15,12 @@ class GraphqlUtil::Http < GraphQL::Client::HTTP
     super(endpoint) do
       def headers(context)
         context ||= {}
-        @headers.merge(context[:headers])
+
+        if context[:headers]
+          @headers.merge(context[:headers])
+        else
+          @headers
+        end
       end
     end
   end
