@@ -11,7 +11,7 @@ class GraphqlUtil::Client < GraphQL::Client
   #
   # @return [GraphQL::Client::Response] Request Response
   #
-  def query(parsed_query, variables: {})
-    super(parsed_query, variables: variables, context: {})
+  def query(parsed_query, variables: {}, context: {})
+    super(parsed_query, variables: variables, context: context)
   end
 end
