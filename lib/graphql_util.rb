@@ -54,7 +54,7 @@ module GraphqlUtil
     #
     # @return [GraphQL::Client::Response] Request Response
     #
-    def query(query, variables:, context:)
+    def query(query, variables:, context: {})
       self::GRAPHQL_UTIL_CLIENT.query(query, variables: variables, context: context)
     end
   end
