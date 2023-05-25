@@ -16,6 +16,22 @@ class GraphqlUtil::Schema
   end
 
   #
+  # Retrieves Enums from Schema
+  #
+  # @return [Array] Enums list
+  #
+  def get_enums
+    enums = {}
+    schema_enums = load_schema.as_json.dig('data', '__schema', 'types').select do |type|
+      type['kind'] == 'ENUM'
+    end
+    schema_enums.each do |e|
+      enums["#{e['name'].downcase}".to_sym] = e['enumValues'].map { |v| v['name'] }
+    end
+    enums
+  end
+
+  #
   # Loads the GraphQL Endpoint Introspection Schema from a dumped file if present, or dumps itself if needed
   #
   # @return [Class] GraphQL Schema
