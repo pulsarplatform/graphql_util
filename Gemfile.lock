@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    graphql_util (0.3.0)
+    graphql_util (0.3.1)
       graphql-client (~> 0)
 
 GEM
