@@ -37,7 +37,9 @@ module GraphqlUtil
       raise "GraphqlUtil - #{const_name} is already defined, please use a different filename." if (base.const_get(const_name.upcase.to_sym).present? rescue false)
 
       base.const_set(const_name.upcase, base::GRAPHQL_UTIL_CLIENT.parse(File.open(filename).read))
-      base.define_singleton_method(const_name.downcase.to_sym) do |variables = {}, context = {}|
+      base.define_singleton_method(const_name.downcase.to_sym) do |args|
+        variables = args.key?(:variables) ? args[:variables] : args
+        context   = args[:context] if args.is_a?(Hash)
         base.query(base.const_get(const_name.upcase.to_sym), variables: variables, context: context)
       end
     end
