@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.2] - 2023-06-05
+
+### Fix
+
+- Remove keywords arguments that broke old code
+
 ## [0.3.1] - 2023-05-26
 
 ### Fix
